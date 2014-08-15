@@ -9,6 +9,7 @@ class BeeMotionDetec(Thread):
         Thread.__init__(self)
         self.capture = cv.CaptureFromCAM(0)
         self.kill_received = False
+        self.client = osc
         #cv.NamedWindow("BeeBox Capture", 1)
 
     def run(self):
@@ -59,7 +60,7 @@ class BeeMotionDetec(Thread):
             points = []
 
             while contour:
-                print list(contour)
+                #print list(contour)
                 bound_rect = cv.BoundingRect(list(contour))
                 contour = contour.h_next()
                 #print bound_rect
@@ -68,6 +69,11 @@ class BeeMotionDetec(Thread):
                 pt2 = (bound_rect[0] + bound_rect[2], bound_rect[1] + bound_rect[3])
                 points.append(pt1)
                 points.append(pt2)
+                print pt1,pt2
+                self.client.send( OSCMessage("/shast/beebox/x", pt1))
+                self.client.send( OSCMessage("/shast/beebox/y", pt2))
+
+                
                 #print pt1,pt2
                 #cv.Circle(color_image, pt1, pt2, cv.CV_RGB(255,0,0), 1)
                 cv.Rectangle(color_image, pt1, pt2, cv.CV_RGB(255,0,0), 1)
