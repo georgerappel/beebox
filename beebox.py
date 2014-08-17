@@ -3,6 +3,7 @@
 
 import sys
 import signal
+import threading
 from optparse import OptionParser
 from OSC import OSCClient
 from beemotion import BeeMotionDetec
@@ -42,6 +43,8 @@ if __name__=="__main__":
 
     client = OSCClient()
     client.connect( (opts.server, opts.oscport) )
+    lock = threading.Lock()
+
 
     #client.send( OSCMessage("/gduarte/1", [1.0, 2.0, 3.0 ] ) )
     #client.send( OSCMessage("/gduarte/2", [2.0, 3.0, 4.0 ] ) )
@@ -50,8 +53,8 @@ if __name__=="__main__":
     #client.send( OSCMessage("/quit") )
     threads = []
     
-    motion = BeeMotionDetec(client)
-    serial = ArduinoSerial(client, opts.port)
+    motion = BeeMotionDetec(client, lock)
+    serial = ArduinoSerial(client, opts.port, lock)
 
     threads.append(motion)
     threads.append(serial)
