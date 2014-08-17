@@ -14,6 +14,7 @@ class ArduinoSerial(threading.Thread):
 		self.lock = threading.Lock()
 		self.serialport = serialport
 		self.lock = lock
+		self.osc = osc
 
 
 		if self.serialport == None:
@@ -22,7 +23,6 @@ class ArduinoSerial(threading.Thread):
 
 		self.port = serial.Serial(serialport, baudrate=9600, parity=serial.PARITY_NONE, bytesize=serial.EIGHTBITS, stopbits=serial.STOPBITS_ONE, timeout=1.0)
 		print self.port
-		time.sleep(2)
 
 	def read(self):
 		return self.port.readline()
@@ -33,16 +33,19 @@ class ArduinoSerial(threading.Thread):
 	def run(self):
 		while not self.kill_received:
 			out = self.read()
-			if len(out) > 10:
+			ary = out.replace("[", "").replace("]", "").split(",")
+			if len(ary) > 2:
 				light, moist, temp, humid = out.replace("[", "").replace("]", "").split(",")
 				self.lock.acquire()
-				self.client.send( OSCMessage("/shast/beebox/humidity", humid))
-				self.client.send( OSCMessage("/shast/beebox/light", light))
-				self.client.send( OSCMessage("/shast/beebox/moist", moist))
-				self.client.send( OSCMessage("/shast/beebox/temperature", temp))
+				self.osc.send( OSCMessage("/shast/beebox/hum", humid))
+				self.osc.send( OSCMessage("/shast/beebox/lig", light))
+				self.osc.send( OSCMessage("/shast/beebox/moi", moist))
+				self.osc.send( OSCMessage("/shast/beebox/temp", temp))
 	            
 				self.lock.release()
 				print light,moist,temp,humid
-				time.sleep(1)		
+				time.sleep(1)
+			else:
+				print out		
 
 
