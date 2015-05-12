@@ -23,13 +23,13 @@ while 1:
 
 
     if   kind == 'TEMP':
-    	client.send( OSCMessage("/shast/beebox/tmp", float(val)/100))
+    	client.send( OSCMessage("/shast/beebox/tmp", val))
     elif kind == 'HUM':
-    	client.send( OSCMessage("/shast/beebox/hum", float(val)/100))
+    	client.send( OSCMessage("/shast/beebox/hum", val))
     elif kind == 'LIGHT':
-    	client.send( OSCMessage("/shast/beebox/lht", float(val)/1024))
+    	client.send( OSCMessage("/shast/beebox/lht", val))
     elif kind == 'MOIST':
-    	client.send( OSCMessage("/shast/beebox/moi", float(val)/1024))
+    	client.send( OSCMessage("/shast/beebox/moi", val))
 
 	#time.sleep(2)
 

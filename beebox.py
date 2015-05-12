@@ -7,7 +7,8 @@ import threading
 from optparse import OptionParser
 from OSC import OSCClient
 from beemotion import BeeMotionDetec
-from arduinoserial import ArduinoSerial
+#from arduinoserial import ArduinoSerial
+#from yundata import YunData
 
 def signal_handler(signal, frame):
         print 'You killed me!'
@@ -18,7 +19,7 @@ if __name__=="__main__":
     parser = OptionParser(usage="usage: %prog [options]",
                           version="%prog 0.1")
     parser.disable_interspersed_args()
-    parser.add_option('--sport', '-p', dest='port', type="string", help="Select the serial port to be used")
+    #parser.add_option('--sport', '-p', dest='port', type="string", help="Select the UDP boardcast port to be used")
     parser.add_option('--osc', '-s', dest='server', type="string", help="Point to OSC server")
     parser.add_option('--oport', '-o', dest='oscport', type="int", help="Server Port")
 
@@ -35,9 +36,9 @@ if __name__=="__main__":
         sys.exit(-1)
 
 
-    if opts.port is None:
-        print "Serial port not chosen"
-        sys.exit(-1)
+    #if opts.port is None:
+    #    print "Serial port not chosen"
+    #    sys.exit(-1)
 
 
 
@@ -54,11 +55,11 @@ if __name__=="__main__":
     threads = []
     
     motion = BeeMotionDetec(client, lock)
-    serial = ArduinoSerial(client, opts.port, lock)
+    #udp_data = YunData(client, opts.port, lock)
 
     threads.append(motion)
-    threads.append(serial)
-    serial.start()
+    #threads.append(udp_data)
+    #udp_data.start()
     motion.start()
 
     while len(threads) > 0:

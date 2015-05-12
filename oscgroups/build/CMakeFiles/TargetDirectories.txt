@@ -1,0 +1,3 @@
+/home/gduarte/dev/oscgroups/build/CMakeFiles/OscGroupClient.dir
+/home/gduarte/dev/oscgroups/build/CMakeFiles/OscGroupServer.dir
+/home/gduarte/dev/oscgroups/build/CMakeFiles/oscpack.dir

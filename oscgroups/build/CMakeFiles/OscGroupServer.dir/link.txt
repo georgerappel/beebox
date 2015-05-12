@@ -1,0 +1,1 @@
+/usr/bin/c++    -I../oscpack -Wall -Wextra -Wno-long-long -pedantic     CMakeFiles/OscGroupServer.dir/OscGroupServer.cpp.o CMakeFiles/OscGroupServer.dir/GroupServer.cpp.o CMakeFiles/OscGroupServer.dir/md5.cpp.o  -o OscGroupServer -rdynamic liboscpack.a 
