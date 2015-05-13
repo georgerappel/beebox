@@ -7,8 +7,6 @@ import threading
 from optparse import OptionParser
 from OSC import OSCClient
 from beemotion import BeeMotionDetec
-#from arduinoserial import ArduinoSerial
-#from yundata import YunData
 
 def signal_handler(signal, frame):
         print 'You killed me!'
