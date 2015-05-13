@@ -1,6 +1,6 @@
-beebox
+S.H.A.S.T
 ======
 
-S.H.A.S.T (Sistema de Habitacional para Abelhas Sem Teto)
+Sistema de Habitacional para Abelhas Sem Teto
 
 > ./start_shast.sh
