@@ -23,8 +23,6 @@ void setup() {
   // Initialize Serial
   Serial.begin(9600);
 
-  // Wait until a Serial Monitor is connected.
-  while (!Serial);
   dht.begin();
   
 }
