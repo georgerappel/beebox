@@ -98,4 +98,4 @@ class BeeMotionDetec(Thread):
             # Listen for ESC key
             #c = cv.WaitKey(7) % 0x100
             #if c == 27:
-                break
+                #break
