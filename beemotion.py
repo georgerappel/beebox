@@ -70,8 +70,8 @@ class BeeMotionDetec(Thread):
 
                 pt1 = (bound_rect[0], bound_rect[1])
                 pt2 = (bound_rect[0] + bound_rect[2], bound_rect[1] + bound_rect[3])
-                points.append(pt1)
-                points.append(pt2)
+                #points.append(pt1)
+                #points.append(pt2)
                 #print pt1,pt2
                 self.lock.acquire()
                 time.sleep(0.5)
