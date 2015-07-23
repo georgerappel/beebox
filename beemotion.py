@@ -70,17 +70,17 @@ class BeeMotionDetec(Thread):
 
                 pt1 = (bound_rect[0], bound_rect[1])
                 pt2 = (bound_rect[0] + bound_rect[2], bound_rect[1] + bound_rect[3])
-                #points.append(pt1)
+                points.append(pt1)
                 #points.append(pt2)
                 #print pt1,pt2
                 self.lock.acquire()
                 time.sleep(0.5)
-                self.client.send( OSCMessage("/shast/beebox/x", pt1))
-                self.client.send( OSCMessage("/shast/beebox/y", pt2))
+                self.client.send( OSCMessage("/shast/beebox/x", pt1[0]))
+                self.client.send( OSCMessage("/shast/beebox/y", pt2[0]))
                 self.lock.release()
 
                 
-                #print pt1,pt2
+                print pt1[0],pt2[0]
                 #cv.Circle(color_image, pt1, pt2, cv.CV_RGB(255,0,0), 1)
                 #cv.Rectangle(color_image, pt1, pt2, cv.CV_RGB(255,0,0), 1)
 
@@ -96,4 +96,4 @@ class BeeMotionDetec(Thread):
             # Listen for ESC key
             #c = cv.WaitKey(7) % 0x100
             #if c == 27:
-            #    break
+                break
