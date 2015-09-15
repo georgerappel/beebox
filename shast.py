@@ -65,6 +65,11 @@ if __name__=="__main__":
             # Join all threads using a timeout so it doesn't block
             # Filter out threads which have been joined or are None
             threads = [t.join(1) for t in threads if t is not None and t.isAlive()]
+            if len(threads) == 0:
+                motion2 = BeeMotionDetec(client, lock)
+                threads.append(motion2)
+                motion2.start()
+                sleep 5
         except KeyboardInterrupt:
             print "Ctrl-c received! Sending kill to threads..."
             for t in threads:
