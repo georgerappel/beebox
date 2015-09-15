@@ -67,17 +67,11 @@ class BeeMotionDetec(Thread):
                 bound_rect = cv.BoundingRect(list(contour))
                 contour = contour.h_next()
                 print bound_rect
-
-                #pt1 = (bound_rect[0], bound_rect[1])
-                #pt2 = (bound_rect[0] + bound_rect[2], bound_rect[1] + bound_rect[3])
-                #points.append(pt1)
-                #points.append(pt2)
-                #print pt1,pt2
                 self.lock.acquire()
-                time.sleep(0.5)
-                #time.sleep(2)
-                self.client.send( OSCMessage("/shast/beebox/x", bound_rect[0]))
-                self.client.send( OSCMessage("/shast/beebox/y", bound_rect[1]))
+                time.sleep(0.2)
+                #Send the central points of the bounded rectangle
+                self.client.send( OSCMessage("/shast/beebox/x", bound_rect[0] + bound_rect[2]/2))
+                self.client.send( OSCMessage("/shast/beebox/y", bound_rect[1] + bound_rect[3]/2))
                 self.lock.release()
 
                 
