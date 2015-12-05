@@ -45,11 +45,7 @@ if __name__=="__main__":
     lock = threading.Lock()
 
 
-    #client.send( OSCMessage("/gduarte/1", [1.0, 2.0, 3.0 ] ) )
-    #client.send( OSCMessage("/gduarte/2", [2.0, 3.0, 4.0 ] ) )
-    #client.send( OSCMessage("/gduarte/3", [2.0, 3.0, 3.1 ] ) )
-    #client.send( OSCMessage("/gduarte/4", [3.2, 3.4, 6.0 ] ) )
-    #client.send( OSCMessage("/quit") )
+    #client.send( OSCMessage("/msg/1", [1.0, 2.1] ) )
     threads = []
     
     motion = BeeMotionDetec(client, lock)
@@ -69,7 +65,7 @@ if __name__=="__main__":
                 motion2 = BeeMotionDetec(client, lock)
                 threads.append(motion2)
                 motion2.start()
-                sleep 5
+                sleep(1)
         except KeyboardInterrupt:
             print "Ctrl-c received! Sending kill to threads..."
             for t in threads:
