@@ -65,7 +65,7 @@ if __name__=="__main__":
                 motion2 = BeeMotionDetec(client, lock)
                 threads.append(motion2)
                 motion2.start()
-                sleep(1)
+                time.sleep(1)
         except KeyboardInterrupt:
             print "Ctrl-c received! Sending kill to threads..."
             for t in threads:
